@@ -1,6 +1,6 @@
 # LDC #
 
-LDC is designed calculate test values for [Advanced Transformer Paralleling - The VAr Balancing (âˆ†VAR) method](http://www.beckwithelectric.com/docs/tech-papers/advxpara.pdf "Beckwith Electric - Advanced Transformer Paralleling")  
+LDC is designed calculate test values for [Advanced Transformer Paralleling - The VAr Balancing (&Delta;VAR) method](http://www.beckwithelectric.com/docs/tech-papers/advxpara.pdf "Beckwith Electric - Advanced Transformer Paralleling")  
 which is available in [M-2001D](http://www.beckwithelectric.com/products/m-2001d.html "Beckwith Electric - M-2001D Digital Tapchanger Control for Transformers and Regulators") product line. 
 
 ### LDC would require following items in your computer: ###
