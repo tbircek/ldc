@@ -40,7 +40,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>sign.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>LDC\sign.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,22 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralSettings.cs">
+    <Compile Include="LDC\classes\GeneralSettings.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GetVoltage.cs">
+    <Compile Include="LDC\classes\GetVoltage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IGetVoltage.cs" />
-    <Compile Include="IGeneralSettings.cs" />
-    <Compile Include="IUCL.cs" />
+    <Compile Include="LDC\interfaces\IGetVoltage.cs" />
+    <Compile Include="LDC\interfaces\IGeneralSettings.cs" />
+    <Compile Include="LDC\interfaces\IUCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UCL.cs" />
+    <Compile Include="LDC\classes\UCL.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -77,17 +77,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sign.pfx" />
+    <None Include="LDC\sign.pfx" />
     <None Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\OMICRON Scripts\DVAr3 P2P - Master Test File.occ">
-      <Link>DVAr3 P2P - Master Test File.occ</Link>
+      <Link>Omicron Scripts\DVAr3 P2P - Master Test File.occ</Link>
     </None>
     <None Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\XRio\master-p2p-ldc-rev14.xrio">
       <SubType>Designer</SubType>
+      <Link>Omicron Scripts\master-p2p-ldc-rev14.xrio</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\OMICRON Scripts\P2P Setup File.xml">
-      <Link>P2P Setup File.xml</Link>
+      <Link>setup-file\P2P Setup File.xml</Link>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

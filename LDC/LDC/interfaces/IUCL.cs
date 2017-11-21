@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace P2PCalculations
 {
     /// <summary>
-    /// Provides access to "P2P Setup File.xml".
+    /// Provides access to "Setup" file.
     /// </summary>
     [ComVisible ( true )]
     [Guid ( "E24CDB75-4ABF-4E6D-BC56-C906647A42D6" )]
