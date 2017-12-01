@@ -23,25 +23,25 @@ namespace P2PCalculations
         /// 1mA DVAr current is equal to 0.12V
         /// </summary>
         [ComVisible(false)]
-        const double VoltageOffsetPerDVArCurrent = 0.12F * 1000F;
+        const double VoltageOffsetPerDVArCurrent = 0.12d * 1000;
 
         /// <summary>
         /// If Sensitivity is smaller than 0 then Sensitivity minimum is 50%
         /// </summary>
         [ComVisible(false)]
-        const double NegativeSensitivityMultiplier = 12.5F;
+        const double NegativeSensitivityMultiplier = 12.5d;
 
         /// <summary>
         /// If Sensitivity is greater than 0 then Sensitivity maximum is 200%
         /// </summary>
         [ComVisible(false)]
-        const double PositiveSensitivityMultiplier = 25.0F;
+        const double PositiveSensitivityMultiplier = 25.0d;
 
         /// <summary>
         /// 1pu is equivalent of 200mA or 0.2A 
         /// </summary>
         [ComVisible(false)]
-        const double PU = 0.2F;
+        const double PU = 0.2d;
 
         /// <summary>
         /// If LineBreaker opens what is the load current
@@ -50,7 +50,7 @@ namespace P2PCalculations
         /// this might also changes like everything else.
         /// </summary>
         [ComVisible(false)]
-        const double CurrentAtLineBreakerOpen = 0.0F;
+        const double CurrentAtLineBreakerOpen = 0.0d;
 
         /// <summary>
         /// Calculates new operating bandcenter per given DVArCurrent.
@@ -75,7 +75,7 @@ namespace P2PCalculations
 
             // Calculating percentage of the Sensitivity 
             // Ex: Sensitivity = 2 => SensitivityMultiplier = 1.5
-            SensitivityMultiplier = (SensitivityMultiplier + 100F) / 100F;
+            SensitivityMultiplier = (SensitivityMultiplier + 100d) / 100d;
 
             return (BandCenterSetting - (DVArCurrent * VoltageOffsetPerDVArCurrent * SensitivityMultiplier));
         }
@@ -200,9 +200,9 @@ namespace P2PCalculations
         {
             double radians;
 
-            if (nominalIL == 0 && reactiveIL == 0)
+            if (nominalIL == 0.0d && reactiveIL == 0d)
             {
-                radians = 0.0;
+                radians = 0.0d;
             }
             else
             {
@@ -269,7 +269,7 @@ namespace P2PCalculations
             }
             else
             {
-                return 0;
+                return 0.0d;
             }
         }
 
@@ -289,7 +289,7 @@ namespace P2PCalculations
         [ComVisible(false)]
         public double CalculateIC(bool Unit1Status, bool Unit2Status, bool Unit3Status, int UnitCurrentToLearn, double PrimaryIC, double Z1, double Z2, int CT, int TotalParallelUnitNumber)
         {
-            double circulatingCurrent = 0.0F;
+            double circulatingCurrent = 0.0d;
             const int inverse = -1;
 
             switch (TotalParallelUnitNumber)
@@ -298,7 +298,7 @@ namespace P2PCalculations
                 case 1:
                     // No Paralleling Active.
                     // Circulating Current = 0.
-                    circulatingCurrent = 0.0F;
+                    circulatingCurrent = 0.0d;
                     break;
 
                 case 2:
@@ -315,7 +315,7 @@ namespace P2PCalculations
                             }
                             else
                             {
-                                circulatingCurrent = 0.0F;
+                                circulatingCurrent = 0.0d;
                             }
                             break;
 
@@ -335,7 +335,7 @@ namespace P2PCalculations
                             }
                             else
                             {
-                                circulatingCurrent = 0.0F;
+                                circulatingCurrent = 0.0d;
                             }
                             break;
 
@@ -347,12 +347,12 @@ namespace P2PCalculations
                             }
                             else
                             {
-                                circulatingCurrent = 0.0F;
+                                circulatingCurrent = 0.0d;
                             }
                             break;
 
                         default:
-                            circulatingCurrent = 0.0F;
+                            circulatingCurrent = 0.0d;
                             break;
                     }
                     break;
@@ -378,14 +378,14 @@ namespace P2PCalculations
 
                         default:
                             // returning 0 just in case of user input error.
-                            circulatingCurrent = 0.0F;
+                            circulatingCurrent = 0.0d;
                             break;
                     }
                     break;
 
                 default:
                     // returning 0 just in case of user input error.
-                    circulatingCurrent = 0;
+                    circulatingCurrent = 0.0d;
                     break;
             }
 
@@ -404,7 +404,7 @@ namespace P2PCalculations
         static double AverageDVAr(double IC1, double IC2, double IC3, double unitIC)
         {
             // to add more precision convert currents to mA.
-            double[] currents = { IC1 * 1000F, IC2 * 1000F, IC3 * 1000F };
+            double[] currents = { IC1 * 1000, IC2 * 1000, IC3 * 1000 };
             TestCase tc = new TestCase();
 
             int maxNetworkDevice = (int)tc.GetSettings("maxnetworkdevice", 0);
@@ -412,15 +412,15 @@ namespace P2PCalculations
 
             foreach (double current in currents)
             {
-                if (current != 0.0F)
+                if (current != 0.0d)
                 {
                     totalUnitsInNetwork++;
                 }
             }
 
-            if (unitIC == 0)
+            if (unitIC == 0.0d)
             {
-                return 0;
+                return 0.0d;
             }
             else
             {
