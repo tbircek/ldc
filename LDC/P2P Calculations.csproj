@@ -81,9 +81,8 @@
     <None Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\OMICRON Scripts\DVAr3 P2P - Master Test File.occ">
       <Link>Omicron Scripts\DVAr3 P2P - Master Test File.occ</Link>
     </None>
-    <None Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\XRio\master-p2p-ldc-rev14.xrio">
-      <SubType>Designer</SubType>
-      <Link>Omicron Scripts\master-p2p-ldc-rev14.xrio</Link>
+    <None Include="\\volta\Eng_Lab\Software Updates\P2P DVAr3\XRio\master-p2p-ldc-rev15.xrio">
+      <Link>Omicron Scripts\master-p2p-ldc-rev15.xrio</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -94,8 +93,62 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>:: Folder Locations
+set winToolKit="\\eng94-win8\\c$\\Program Files\\Windows Kits\\10\\bin\\x86\\"
+set mainProject="C:\\Users\\tbircek\\Documents\\Visual Studio 2010\\CSharp\\LDC\\LDC\\bin\\$(Configuration)\\"
+set allFiles=%25packages%25*.DLL
+
+:: Certificate Items
+set timeServer=http://time.certum.pl
+set certIssuer="Turgay Bircek"
+set sha=d7ea1283e54b37bae14283a5c3ee34139410b63b
+set certID="Turgay Bircek"
+set crossSigner=%25documents%25Certificate\\DigiCert High Assurance EV Root CA.crt
+
+:: Sign Files
+echo
+echo ----------------------------------------
+echo Signing files ... PLEASE WAIT ...
+echo ----------------------------------------
+::sha1 signing
+%25winToolKit%25\\signtool.exe sign /v /i %25certIssuer%25 /n %25certID%25 /t %25timeServer%25 /sha1 %25sha%25 %25allFiles%25
+::sha256 signing
+%25winToolKit%25\\signtool.exe sign /v /i %25certIssuer%25 /n %25certID%25 /tr %25timeServer%25 /td sha256 /fd sha256 /as /sha1 %25sha%25 %25allFiles%25
+
+IF ERRORLEVEL 1 (
+echo failed to sign files
+exit /b 2
+)</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>:: Folder Locations
+set winToolKit="\\eng94-win8\\c$\\Program Files\\Windows Kits\\10\\bin\\x86\\"
+set mainProject="C:\\Users\\tbircek\\Documents\\Visual Studio 2010\\Projects\\CSharp\\LDC\\LDC\\bin\Release\\"
+set allFiles=%25packages%25*.DLL 
+
+:: Certificate Items
+set timeServer=http://time.certum.pl
+set certIssuer="Turgay Bircek"
+:: set sha=CC59DAB7C8295C0E600931FCC26755EB52B827EF :: Older license key
+set sha=d7ea1283e54b37bae14283a5c3ee34139410b63b
+set certID="Turgay Bircek"
+::set crossSigner=%25documents%25Certificate\\DigiCert High Assurance EV Root CA.crt
+
+:: Sign Files
+echo
+echo ----------------------------------------
+echo ... PRE-BUILD STARTED ....
+echo Signing files ... PLEASE WAIT ...
+echo ----------------------------------------
+:: sha1 signing
+%25winToolKit%25\\signtool.exe sign /v /i %25certIssuer%25 /n %25certID%25 /t %25timeServer%25 /sha1 %25sha%25 %25allFiles%25
+::sha256 signing
+%25winToolKit%25\\signtool.exe sign /v /i %25certIssuer%25 /n %25certID%25 /tr %25timeServer%25 /td sha256 /fd sha256 /as /sha1 %25sha%25 %25allFiles%25
+
+IF ERRORLEVEL 1 (
+echo failed to sign files
+exit /b 2
+)</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
